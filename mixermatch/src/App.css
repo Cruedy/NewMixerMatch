@@ -30,8 +30,9 @@ body {
 }
 
 .form-container {
-  width: 400px;
-  height: 400px;
+  /* width: 800px; */
+  /* height: 400px; */
+  padding: 50px;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
@@ -79,14 +80,6 @@ body {
   align-items: center;
 }
 
-.question-container input {
-  margin: 5px;
-  width: 200px;
-  height: 40px;
-  padding-left: 5px;
-  font-size: 20px;
-}
-
 /* PROGRESS BAR */
 .progressbar {
   width: 400px;
@@ -101,28 +94,24 @@ body {
   background-color: rgb(98, 0, 255);
 }
 
-.other-info-container {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+ul{
+  list-style: none;
 }
 
-.other-info-container input {
-  margin: 5px;
-  width: 200px;
-  height: 40px;
-  padding-left: 5px;
+.question-option{
+  background-color: rgb(237, 132, 226);
+  padding: 16px;
+  border: 3px solid black;
+  border-radius: 20px;
   font-size: 20px;
+  margin-top: 8px;
 }
 
-input {
-  border: 2px solid rgb(98, 0, 255);
-  border-radius: 5px;
+.question-option:hover {
+  background-color: rgb(255, 83, 241);
+  cursor: pointer;
 }
 
-input:focus {
-  border: 3px solid rgb(98, 0, 255);
+.question-text{
+  font-size: 24px;
 }

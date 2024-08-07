@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import Question1 from "./Question1";
+import Question1, {answers} from "./Question1";
 import Question2 from "./Question2";
 import Question3 from "./Question3";
 
-function Form() {
+export const resultSet = [];
+export default function Form(){
     const [page, setPage] = useState(0);
     const FormTitles = ["Question 1", "Question 2", "Question 3"]
     const PageDisplay = () => {
@@ -15,10 +16,17 @@ function Form() {
             return <Question3 />;
         }
     }
+    const checkAnswered = () => {
+        console.log('result', resultSet);
+        if (resultSet.length-1 == page) {
+            return true;
+        }
+        return false;
+    }
     return (
         <div className="form">
             <div className="progressbar"></div>
-            <div className="form-contianer">
+            <div className="form-container">
                 <div className="header"></div>
                 <h1>{FormTitles[page]}</h1>
                 <div className="body">{PageDisplay()}</div>
@@ -30,19 +38,24 @@ function Form() {
                         }}>
                             Prev
                     </button>
-                    <button 
-                        // disabled={page == FormTitles.length -1}
-                        hidden={page >= FormTitles.length -1}
+                    <button
+                        hidden={page >= FormTitles.length -1 }
                         onClick={() => {
-                        setPage((currPage) => currPage + 1);
+                        console.log('active');
+                        if (checkAnswered() == true) {
+                            setPage((currPage) => currPage + 1);
+                        }
+                        console.log('answering', checkAnswered());
                         }}>
                             Next
                     </button>
                     <button 
-                        // disabled={page == FormTitles.length -1}
                         hidden={page < FormTitles.length -1 || page > FormTitles.length -1}
                         onClick={() => {
-                        setPage((currPage) => currPage + 1);
+                        if (checkAnswered() == true) {
+                            setPage((currPage) => currPage + 1);
+                        }
+                        checkAnswered();
                         }}>
                             Submit
                     </button>
@@ -51,5 +64,3 @@ function Form() {
         </div>
     )
 }
-
-export default Form;
