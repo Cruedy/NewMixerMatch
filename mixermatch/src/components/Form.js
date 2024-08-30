@@ -1,24 +1,14 @@
 import React, {useState} from 'react';
 import Question1, {answers} from "./Question1";
-import Question2 from "./Question2";
-import Question3 from "./Question3";
+import questions from "./QuestionList";
 
 export const resultSet = [];
 export default function Form(){
     const [page, setPage] = useState(0);
     const FormTitles = ["Question 1", "Question 2", "Question 3"]
-    const PageDisplay = () => {
-        if (page == 0) {
-            return <Question1 />;
-        } else if (page == 1) {
-            return <Question2 />;
-        } else {
-            return <Question3 />;
-        }
-    }
     const checkAnswered = () => {
         console.log('result', resultSet);
-        if (resultSet.length-1 == page) {
+        if (resultSet.length > page && resultSet[page] != undefined) {
             return true;
         }
         return false;
@@ -29,7 +19,9 @@ export default function Form(){
             <div className="form-container">
                 <div className="header"></div>
                 <h1>{FormTitles[page]}</h1>
-                <div className="body">{PageDisplay()}</div>
+                <div className="body">
+                    <Question1 currentIndex={page}/>
+                </div>
                 <div className="footer">
                     <button 
                         hidden={page == 0}
