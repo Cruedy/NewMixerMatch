@@ -1,12 +1,18 @@
 import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Form from './components/Form';
+import Results from './components/Results';
 
 function App() {
   return (
-    <div className="App">
-      {" "}
-      <Form />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Form />} />
+        <Route path="results" element={<Results />} />
+        {/* Add other routes here */}
+      </Routes>
+    </Router>
   );
 }
 

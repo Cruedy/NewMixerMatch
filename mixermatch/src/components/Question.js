@@ -1,24 +1,20 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import questions from "./QuestionList";
 import {resultSet} from "./Form";
 
-function Question1({currentIndex}) {
+function Question({currentIndex, resetActive}) {
     const [activeIndex, setActiveIndex] = useState(null);
 
     const addItem = (item, index) => {
-        console.log('called');
-        console.log(resultSet);
-        console.log('length', resultSet.length);
         resultSet[currentIndex] = item;
         console.log('added', resultSet);
-        // if (resultSet.length <= currentIndex){
-            
-        // }
-        // else {
-        //     resultSet[currentIndex] = item;
-        // }
         setActiveIndex(index);
     }
+
+    useEffect(() => {
+        setActiveIndex(null);
+    }, [resetActive]);
+
     return (
         <div className="question-container">
         <h1 className='question-text'>{questions[currentIndex].question}</h1>
@@ -36,4 +32,4 @@ function Question1({currentIndex}) {
     </div>);
 }
 
-export default Question1;
+export default Question;
