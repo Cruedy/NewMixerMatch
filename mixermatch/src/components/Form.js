@@ -9,7 +9,7 @@ export default function Form(){
     let navigate = useNavigate();
     const [page, setPage] = useState(0);
     const [resetActive, setResetActive] = useState(false);
-    // const FormTitles = ["Question 1", "Question 2", "Question 3"]
+    let prog = ((((page + 1)/questions.length) * 100).toString()).concat("%"); 
     const checkAnswered = () => {
         console.log('result', resultSet);
         if (resultSet.length > page && resultSet[page] != undefined) {
@@ -38,9 +38,13 @@ export default function Form(){
             console.log("Form Done!")
         }
     }
+
     return (
         <div className="form">
-            <div className="progressbar"></div>
+            <div className="progressbar">
+                <div style={{width: prog}}>
+                </div>
+            </div>
             <div className="form-container">
                 <div className="header"></div>
                 <h1>Question {page + 1}</h1>
