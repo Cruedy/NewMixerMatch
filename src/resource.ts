@@ -1,0 +1,1 @@
+../amplify/data/resource.ts

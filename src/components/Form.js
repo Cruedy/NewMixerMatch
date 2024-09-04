@@ -3,6 +3,9 @@ import {useNavigate} from "react-router-dom";
 import Question, {answers} from "./Question";
 import questions from "./QuestionList";
 import Results from "./Results"
+import { generateClient } from "aws-amplify/data";
+
+const client = generateClient();
 
 export const resultSet = [];
 export default function Form(){
@@ -32,7 +35,16 @@ export default function Form(){
     }
 
     const handleSubmit = () => {
+        // send information to database
         if(checkAnswered()) {
+            try {
+                client.models.Todo.create({
+                    resultSet: resultSet,
+                });
+                console.log("Form saved to database!")
+            } catch (error) {
+                console.error("Couldn't save form to database!")
+            }
             setResetActive((prev) => !prev);
             navigate("/results");
             console.log("Form Done!")
