@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import Question, {answers} from "./Question";
 import questions from "./QuestionList";
@@ -13,6 +13,26 @@ export default function Form(){
     const [page, setPage] = useState(0);
     const [resetActive, setResetActive] = useState(false);
     let prog = ((((page + 1)/questions.length) * 100).toString()).concat("%"); 
+    const [todos, setTodos] = useState([]);
+
+    // const fetchTodos = async () => {
+    //     const { data: items, errors } = await client.models.Todo.list();
+    //     setTodos(items);
+    // };
+    
+    useEffect(() => {
+        const sub = client.models.Todo.observeQuery().subscribe({
+            next: ({ items }) => {
+                setTodos([...items]);
+            },
+        });
+        return () => sub.unsubscribe();
+    }, []);
+
+    // useEffect(() => {
+    //     fetchTodos();
+    // }, []);
+
     const checkAnswered = () => {
         console.log('result', resultSet);
         if (resultSet.length > page && resultSet[page] != undefined) {
@@ -41,6 +61,7 @@ export default function Form(){
                 client.models.Todo.create({
                     resultSet: resultSet,
                 });
+                // fetchTodos();
                 console.log("Form saved to database!")
             } catch (error) {
                 console.error("Couldn't save form to database!")

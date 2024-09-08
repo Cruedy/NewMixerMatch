@@ -1,0 +1,10 @@
+{
+  "resourceName": "firstDynamo",
+  "tableName": "firstDynamoTable",
+  "partitionKey": {
+    "fieldName": "Username",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

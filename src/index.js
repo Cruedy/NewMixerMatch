@@ -4,8 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { resultSet } from './components/Form';
-import { Amplify } from 'aws-amplify';
+import { Amplify, generateClient } from 'aws-amplify';
 import outputs from './amplify_outputs.json';
+import { useState, useEffect } from "react";
 
 Amplify.configure(outputs);
 
